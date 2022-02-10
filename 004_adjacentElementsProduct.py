@@ -1,6 +1,3 @@
-import itertools
-
-
 def solution(inputArray):
     max_product = inputArray[0] * inputArray[1]
     for i in range(1, len(inputArray) - 1):
