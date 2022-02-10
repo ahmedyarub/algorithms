@@ -16,7 +16,3 @@ def solution(inputString):
                 has_odd = True
 
     return (not has_odd) or (len(inputString) % 2 == 1 and has_odd)
-
-
-if __name__ == '__main__':
-    print(solution("aacdbb"))
