@@ -17,6 +17,3 @@ class Solution(object):
 
         return -1
 
-
-if __name__ == '__main__':
-    print(Solution().search([-1, 0, 3, 5, 9, 12], 13))
