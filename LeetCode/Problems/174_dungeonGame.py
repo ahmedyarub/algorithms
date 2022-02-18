@@ -15,9 +15,6 @@ class Solution:
 
                 cur_hp = dungeon[i][j] * -1 + min(next_hps, default=0)
 
-                if cur_hp <= 0:
-                    cur_hp = 0
-
-                min_hps[i][j] = cur_hp
+                min_hps[i][j] = 0 if cur_hp < 0 else cur_hp
 
         return min_hps[0][0] + 1
