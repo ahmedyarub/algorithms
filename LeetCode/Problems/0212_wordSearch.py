@@ -9,7 +9,6 @@ class Solution:
 
         for i in range(len(board)):
             for j in range(len(board[0])):
-                print("{},{} {}".format(i, j, len(words)))
                 backtracking(board, i, j, trie, found_words, set())
 
         return list(found_words)
