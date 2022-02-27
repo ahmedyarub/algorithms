@@ -12,8 +12,4 @@ class Solution:
         if dic[n] == 0:
             dic[n] = self.helper(n - 1, dic) + self.helper(n - 2, dic)
 
-        return dic[n]
-
-
-if __name__ == '__main__':
-    print(Solution().climbStairs(2))
+        return dic[3]
