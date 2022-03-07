@@ -9,7 +9,7 @@ class Solution:
         return heappop(self.heap)
 
     def buildHeap(self, node):
-        if node == None:
+        if node is None:
             return
 
         heappush(self.heap, node.val)
