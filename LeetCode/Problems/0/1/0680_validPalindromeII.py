@@ -15,7 +15,3 @@ class Solution:
             return True
 
         return isPalindrome(s, True)
-
-
-if __name__ == '__main__':
-    print(Solution().validPalindrome("abc"))

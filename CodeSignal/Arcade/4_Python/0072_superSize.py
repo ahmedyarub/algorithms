@@ -12,7 +12,3 @@ class Prizes(object):
 
 def solution(purchases, n, d):
     return list(Prizes(purchases, n, d))
-
-
-if __name__ == '__main__':
-    print(solution([12, 43, 13, 465, 1, 13], 2, 3))

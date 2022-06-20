@@ -17,7 +17,3 @@ class Solution:
                 return "".join(map(str, reversed(result[:i + 1])))
 
         return "0"
-
-
-if __name__ == '__main__':
-    print(Solution().multiply("2", "3"))

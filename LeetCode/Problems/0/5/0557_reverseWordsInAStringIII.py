@@ -11,7 +11,3 @@ class Solution:
             i2 += 1
 
         return " ".join(result)
-
-
-if __name__ == "__main__":
-    print(Solution().reverseWords("Let's take LeetCode contest"))

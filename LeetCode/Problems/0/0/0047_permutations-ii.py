@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         result = set()
@@ -19,7 +16,3 @@ class Solution:
 
         backtrack(0)
         return list(map(list, result))
-
-
-if __name__ == '__main__':
-    print(Solution().permuteUnique([1, 1, 2]))

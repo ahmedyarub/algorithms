@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def missingNumber(self, arr: List[int]) -> int:
         if arr[0] > arr[-1]:
@@ -12,7 +9,3 @@ class Solution:
             return arr[0]
 
         return [n for n in range(arr[0], arr[-1], step) if n not in set(arr)][0]
-
-
-if __name__ == '__main__':
-    print(Solution().missingNumber([15, 13, 12]))

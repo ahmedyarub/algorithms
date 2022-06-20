@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def specialArray(self, nums: List[int]) -> int:
         nums.sort()
@@ -18,7 +15,3 @@ class Solution:
                 left = mid + 1
 
         return -1
-
-
-if __name__ == '__main__':
-    print(Solution().specialArray([3, 6, 7, 7, 0]))

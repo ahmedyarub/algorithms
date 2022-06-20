@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
         target = image[sr][sc]
@@ -31,7 +28,3 @@ class Solution:
                 queue.append([r + 1, c])
 
         return image
-
-
-if __name__ == '__main__':
-    print(Solution().floodFill([[0, 0, 0], [0, 1, 1]], 1, 1, 1))

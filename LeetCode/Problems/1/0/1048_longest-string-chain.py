@@ -1,7 +1,3 @@
-from collections import defaultdict
-from typing import List
-
-
 class Solution:
     def longestStrChain(self, words: List[str]) -> int:
         lmp, mem = defaultdict(list), dict()
@@ -34,13 +30,3 @@ class Solution:
             return result
 
         return max([traverse(1, word) for word in words])
-
-
-if __name__ == '__main__':
-    print(Solution().longestStrChain(["a", "ab", "abc"]))
-    print(Solution().longestStrChain(
-        ["b", "vb", "ktttrh", "rvqby", "kttrh", "bktttirhx", "bktttrh", "rvqb", "ktrh", "rvb", "bktttrhx",
-         "cbktttirhx"]))
-    print(Solution().longestStrChain(["a", "b", "ba", "bca", "bda", "bdca"]))
-    print(Solution().longestStrChain(["xbc", "pcxbcf", "xb", "cxbc", "pcxbc"]))
-    print(Solution().longestStrChain(["abcd", "dbqca"]))

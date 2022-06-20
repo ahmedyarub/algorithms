@@ -49,7 +49,3 @@ def drawtree(root):
     draw(root, 0, 30 * h, 40 * h)
     t.hideturtle()
     turtle.mainloop()
-
-
-if __name__ == '__main__':
-    drawtree(deserialize('[2,1,3,0,7,9,1,2,null,1,0,null,null,8,8,null,null,null,null,7]'))

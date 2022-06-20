@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         s = [[float('inf')] * (i + 1) for i in range(len(triangle))]
@@ -19,7 +16,3 @@ class Solution:
         traverse(0, 0, 0)
 
         return int(min(s[-1]))
-
-
-if __name__ == '__main__':
-    print(Solution().minimumTotal([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]))

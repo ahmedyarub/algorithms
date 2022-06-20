@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
         h, w = len(grid), len(grid[0])
@@ -23,7 +20,3 @@ class Solution:
                     visited.add((cur_x, cur_y))
 
         return -1
-
-
-if __name__ == '__main__':
-    print(Solution().shortestPathBinaryMatrix([[0, 0, 0], [1, 1, 0], [1, 1, 0]]))

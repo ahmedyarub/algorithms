@@ -21,8 +21,3 @@ class CombinationIterator:
 
     def hasNext(self) -> bool:
         return self.i < len(self.ans)
-
-
-if __name__ == '__main__':
-    c = CombinationIterator("abcd", 3)
-    print(c.ans)

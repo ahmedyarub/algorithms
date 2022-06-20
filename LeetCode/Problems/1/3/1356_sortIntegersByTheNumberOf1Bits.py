@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def sortByBits(self, arr: List[int]) -> List[int]:
         def countBit(n):
@@ -12,7 +9,3 @@ class Solution:
             return count
 
         return [n[1] for n in sorted([[countBit(i), i] for i in arr])]
-
-
-if __name__ == '__main__':
-    print(Solution().sortByBits([0, 1, 2, 3, 4, 5, 6, 7, 8]))

@@ -16,7 +16,3 @@ class Solution:
             result += (cur_sum % 10) * (10 ** i)
 
         return str(result + carry * (10 ** max_len))
-
-
-if __name__ == '__main__':
-    print(Solution().addStrings("1", "9"))

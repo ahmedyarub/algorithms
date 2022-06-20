@@ -9,7 +9,3 @@ class Solution:
 
         return sum(expand(s, left, right) // 2 for center in range(len(s)) for left, right in
                    [(center, center), (center, center + 1)])
-
-
-if __name__ == '__main__':
-    print(Solution().countSubstrings("abc"))
