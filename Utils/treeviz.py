@@ -1,3 +1,26 @@
+from typing import List, Optional
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def arrayToLinkedList(arr: List) -> Optional[ListNode]:
+    head: ListNode = None
+    prev: ListNode = head
+    for item in arr:
+        node = ListNode(item)
+        if not head:
+            head = node
+        else:
+            prev.next = node
+        prev = node
+
+    return head
+
+
 class TreeNode:
     def __init__(self, val, left=None, right=None):
         self.val = val
