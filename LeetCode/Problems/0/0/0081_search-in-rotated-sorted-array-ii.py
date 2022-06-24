@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def search(self, nums: List[int], target: int) -> bool:
         left, right = 0, len(nums)
@@ -29,7 +26,3 @@ class Solution:
                 right = mid
 
         return False
-
-
-if __name__ == '__main__':
-    print(Solution().search([1, 1, 3], 3))

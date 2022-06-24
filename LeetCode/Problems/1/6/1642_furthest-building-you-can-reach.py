@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
         result = 0
@@ -26,7 +23,3 @@ class Solution:
         traverse(bricks, ladders, 0)
 
         return result
-
-
-if __name__ == '__main__':
-    print(Solution().furthestBuilding([4, 12, 2, 7, 3, 18, 20, 3, 19], 10, 2))
