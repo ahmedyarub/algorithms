@@ -31,7 +31,7 @@ class TreeNode:
         return 'TreeNode({})'.format(self.val)
 
 
-def deserialize(string):
+def stringToTree(string: str) -> Optional[TreeNode]:
     if string == '{}':
         return None
     nodes = [None if val == 'null' else TreeNode(int(val))
@@ -45,7 +45,7 @@ def deserialize(string):
     return root
 
 
-def drawtree(root):
+def drawtree(root: TreeNode):
     def height(root):
         return 1 + max(height(root.left), height(root.right)) if root else -1
 
