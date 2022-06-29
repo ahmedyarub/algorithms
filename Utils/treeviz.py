@@ -73,6 +73,7 @@ def drawtree(root: TreeNode):
     t.hideturtle()
     turtle.mainloop()
 
+
 class Node:
     def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
         self.val = val
