@@ -7,16 +7,28 @@ class ListNode:
         self.next = next
 
 
-def arrayToLinkedList(arr: List) -> Optional[ListNode]:
+def arrayToLinkedList(arr: List, cycle: int = None) -> Optional[ListNode]:
     head: ListNode = None
     prev: ListNode = head
+    cycle_node: ListNode = None
+    cnt: int = 0
+
     for item in arr:
         node = ListNode(item)
+
+        if cycle is not None and cnt == cycle:
+            cycle_node = node
+
+        cnt += 1
+
         if not head:
             head = node
         else:
             prev.next = node
         prev = node
+
+    if cycle_node:
+        prev.next = cycle_node
 
     return head
 
