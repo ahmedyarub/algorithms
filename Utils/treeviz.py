@@ -57,6 +57,24 @@ def stringToTree(string: str) -> Optional[TreeNode]:
     return root
 
 
+def getTreeNode(root: TreeNode, val: int) -> Optional[TreeNode]:
+    queue = [root]
+
+    while queue:
+        node = queue.pop()
+
+        if node.val == val:
+            return node
+
+        if node.left:
+            queue.append(node.left)
+
+        if node.right:
+            queue.append(node.right)
+
+    return None
+
+
 def drawtree(root: TreeNode):
     def height(root):
         return 1 + max(height(root.left), height(root.right)) if root else -1
