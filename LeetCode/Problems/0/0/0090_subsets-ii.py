@@ -1,14 +1,12 @@
 class Solution:
-    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        seen, result = set(), set()
-
-        def traverse(rem: List[int], path: tuple):
-            if path not in seen:
-                result.add(path)
-
-                for i, num in enumerate(rem):
-                    traverse(rem[:i] + rem[i + 1:], tuple(sorted((path + (num,)))))
+    def subsetsWithDup(self, nums):
+        if not nums:
+            return []
 
         nums.sort()
-        traverse(nums, ())
-        return list(map(list, result))
+        res, cur = [[]], []
+        for i in range(len(nums)):
+            cur = [item + [nums[i]] for item in (cur if i > 0 and nums[i] == nums[i - 1] else res)]
+            res += cur
+
+        return res
