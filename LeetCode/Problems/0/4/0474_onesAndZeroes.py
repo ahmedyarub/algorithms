@@ -1,6 +1,13 @@
 class Solution:
-    def dayOfYear(self, date: str) -> int:
-        y, m, d = map(int, date.split('-'))
-        days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-        if (y % 400) == 0 or ((y % 4 == 0) and (y % 100 != 0)): days[1] = 29
-        return d + sum(days[:m - 1])
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        strs.sort(key=len)
+        dp = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+
+        for st in strs:
+            zeros = st.count("0")
+            ones = len(st) - zeros
+            for i in range(m, zeros - 1, -1):
+                for j in range(n, ones - 1, -1):
+                    dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1)
+
+        return dp[m][n]
