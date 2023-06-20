@@ -4,7 +4,7 @@ class Solution:
         tcs = Counter([c for c in text])
 
         min_b = float('inf')
-        for bi, bc in bcs.items():
+        for bi, bc in bcs.vehicles():
             if bi not in tcs or bc > tcs[bi]:
                 return 0
 

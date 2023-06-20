@@ -1,13 +1,16 @@
 class Solution:
-    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
-        jumps_pq = []
-        for i in range(len(heights) - 1):
-            jump_height = heights[i + 1] - heights[i]
-            if jump_height <= 0:
-                continue
-            heappush(jumps_pq, jump_height)
-            if len(jumps_pq) > ladders:
-                bricks -= heappop(jumps_pq)
-            if bricks < 0:
-                return i
-        return len(heights) - 1
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+
+        def traverse(start: int) -> List[List[int]]:
+            nonlocal nums
+
+            result = [[]]
+
+            if start < len(nums):
+                for i in range(start, len(nums)):
+                    result.extend([[nums[i]] + nxt for nxt in traverse(i + 1)])
+
+            return result
+
+        return traverse(0)

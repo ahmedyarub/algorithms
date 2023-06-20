@@ -1,37 +1,34 @@
 class Trie:
 
     def __init__(self):
-        self.trie = {}
+        self.trie = defaultdict(list)
 
     def insert(self, word: str) -> None:
-        cur = self.trie
+        node = self.trie
+        for c in word:
+            if c not in node:
+                node[c] = defaultdict(list)
 
-        for c in list(word):
-            if c not in cur:
-                cur[c] = {}
+            node = node[c]
 
-            cur = cur[c]
-
-        cur['#'] = word
+        node['$'] = defaultdict(list)
 
     def search(self, word: str) -> bool:
-        cur = self.trie
-
-        for c in list(word):
-            if c not in cur:
+        node = self.trie
+        for c in word:
+            if c not in node:
                 return False
 
-            cur = cur[c]
+            node = node[c]
 
-        return '#' in cur
+        return '$' in node
 
     def startsWith(self, prefix: str) -> bool:
-        cur = self.trie
-
-        for c in list(prefix):
-            if c not in cur:
+        node = self.trie
+        for c in prefix:
+            if c not in node:
                 return False
 
-            cur = cur[c]
+            node = node[c]
 
         return True

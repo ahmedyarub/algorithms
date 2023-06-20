@@ -1,19 +1,21 @@
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        self.balanced = True
+        result = True
 
-        def traverse(node):
-            if not self.balanced or not node:
+        def driver(node: Optional[TreeNode]) -> int:
+            nonlocal result
+
+            if not node:
                 return 0
 
-            left = traverse(node.left)
-            right = traverse(node.right)
+            left = driver(node.left)
+            right = driver(node.right)
 
-            if abs(left - right) > 1:
-                self.balanced = False
+            if abs(right - left) > 1:
+                result = False
 
             return max(left, right) + 1
 
-        traverse(root)
+        driver(root)
 
-        return self.balanced
+        return result

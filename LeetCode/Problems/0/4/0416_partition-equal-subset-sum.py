@@ -2,13 +2,15 @@ class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         s = sum(nums)
 
-        if s % 2:
-            return False
+        @cache
+        def traverse(curr: int, idx: int) -> bool:
+            nonlocal s
 
-        dp = [False] * (s // 2 + 1)
-        dp[0] = True
-        for num in nums:
-            for j in range(s // 2, num - 1, -1):
-                dp[j] = dp[j] or dp[j - num]
+            if idx == len(nums):
+                return curr == s // 2
+            elif curr + nums[idx] == s // 2 or (curr + nums[idx] < s // 2 and traverse(curr + nums[idx], idx + 1)):
+                return True
+            else:
+                return traverse(curr, idx + 1)
 
-        return dp[s // 2]
+        return not s % 2 and traverse(0, 0)

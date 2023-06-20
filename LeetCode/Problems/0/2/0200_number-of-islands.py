@@ -1,17 +1,22 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         result = 0
-        for row in range(len(grid)):
-            for col in range(len(grid[0])):
-                if grid[row][col] == '1':
+
+        def bfs(r: int, c: int):
+            nonlocal result
+
+            if 0 <= r < len(grid) and 0 <= c < len(grid[0]) and int(grid[r][c]) == 1:
+                grid[r][c] = str(result * -1)
+            else:
+                return
+
+            for offset in [[0, -1], [-1, 0], [0, 1], [1, 0]]:
+                bfs(r + offset[0], c + offset[1])
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == '1':
                     result += 1
-                    queue = [(row, col)]
+                    bfs(r, c)
 
-                    while queue:
-                        crow, ccol = queue.pop()
-
-                        for nrow, ncol in [(crow, ccol - 1), (crow - 1, ccol), (crow, ccol + 1), (crow + 1, ccol)]:
-                            if 0 <= nrow < len(grid) and 0 <= ncol < len(grid[0]) and grid[nrow][ncol] == '1':
-                                grid[nrow][ncol] = '2'
-                                queue.append((nrow, ncol))
         return result

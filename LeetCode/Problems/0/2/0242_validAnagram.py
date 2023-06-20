@@ -1,6 +1,11 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
+        sc = Counter(s)
 
-        return Counter(s) == Counter(t)
+        for ct in t:
+            if ct not in sc:
+                return False
+
+            sc[ct] -= 1
+
+        return not any(sc.values())

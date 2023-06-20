@@ -1,17 +1,24 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        self.heap = []
-        self.buildHeap(root)
+        cur_k, result = 0, 0
 
-        for _ in range(k - 1):
-            heappop(self.heap)
+        def get_smallest(node: TreeNode):
+            nonlocal cur_k, k, result
+            if result:
+                return
 
-        return heappop(self.heap)
+            if node.left:
+                get_smallest(node.left)
 
-    def buildHeap(self, node):
-        if node is None:
-            return
+            cur_k += 1
 
-        heappush(self.heap, node.val)
-        self.buildHeap(node.left)
-        self.buildHeap(node.right)
+            if cur_k == k:
+                result = node.val
+                return
+
+            if node.right:
+                get_smallest(node.right)
+
+        get_smallest(root)
+
+        return result

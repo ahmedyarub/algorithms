@@ -15,4 +15,4 @@ class Solution:
 
         traverse(root)
 
-        return [v for v, c in counts.items() if c == self.max_count]
+        return [v for v, c in counts.vehicles() if c == self.max_count]

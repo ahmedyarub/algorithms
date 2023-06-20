@@ -1,17 +1,19 @@
 class Solution:
-    def mergeTwoLists(self, l1, l2):
-        prehead = ListNode(-1)
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        p1, p2 = list1, list2
+        cur, head = ListNode(), None
 
-        prev = prehead
-        while l1 and l2:
-            if l1.val <= l2.val:
-                prev.next = l1
-                l1 = l1.next
+        while p1 or p2:
+            if not p2 or (p1 and p1.val <= p2.val):
+                cur.next = p1
+                p1 = p1.next
             else:
-                prev.next = l2
-                l2 = l2.next
-            prev = prev.next
+                cur.next = p2
+                p2 = p2.next
 
-        prev.next = l1 or l2
+            cur = cur.next
 
-        return prehead.next
+            if not head:
+                head = cur
+
+        return head

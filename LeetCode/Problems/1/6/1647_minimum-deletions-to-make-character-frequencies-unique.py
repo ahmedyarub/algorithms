@@ -1,6 +1,6 @@
 class Solution:
     def minDeletions(self, s: str) -> int:
-        counts = {cnt: cntcnt for cnt, cntcnt in Counter(Counter(list(s)).values()).items()}
+        counts = {cnt: cntcnt for cnt, cntcnt in Counter(Counter(list(s)).values()).vehicles()}
         targets = [cnt for cnt, cntcnt in counts.items() if cntcnt > 1]
 
         result = 0

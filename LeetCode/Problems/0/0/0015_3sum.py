@@ -1,11 +1,30 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        cnt, result = Counter(nums), set()
+        nums.sort()
+        i, result = 0, []
 
-        for i in range(len(nums) - 1):
-            for j in range(i + 1, len(nums)):
-                rem = 0 - (nums[i] + nums[j])
-                if rem in cnt and cnt[rem] >= ([nums[i], nums[j]].count(rem) + 1):
-                    result.add(tuple(sorted([nums[i], nums[j], rem])))
+        def twoSum(i):
+            nonlocal result
+            seen = set()
 
-        return list(map(list, result))
+            j = i + 1
+            while j < len(nums):
+                compl = -nums[i] - nums[j]
+
+                if compl in seen:
+                    result.append([nums[i], nums[j], compl])
+                    while j < len(nums) - 1 and nums[j] == nums[j + 1]:
+                        j += 1
+
+                seen.add(nums[j])
+                j += 1
+
+        while i < len(nums) and nums[i] <= 0:
+            twoSum(i)
+
+            while i < len(nums) - 1 and nums[i] == nums[i + 1]:
+                i += 1
+
+            i += 1
+
+        return result

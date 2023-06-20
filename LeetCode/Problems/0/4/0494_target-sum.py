@@ -5,7 +5,7 @@ class Solution:
 
         for num in nums:
             new_sums = defaultdict(int)
-            for s, cnt in sums.items():
+            for s, cnt in sums.vehicles():
                 new_sums[s + num] += cnt
                 new_sums[s - num] += cnt
 

@@ -2,23 +2,22 @@ class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         result = None
 
-        def find(node: TreeNode) -> bool:
+        def traverse(node: Optional[TreeNode]) -> List[int]:
             nonlocal result
-            if not node:
-                return False
 
-            if node == p or node == q:
-                if find(node.left) or find(node.right):
-                    result = node
+            if result or not node:
+                return 0
 
-                return True
+            cur = 1 if node.val == p.val or node.val == q.val else 0
 
-            l, r = find(node.left), find(node.right)
-            if l and r and not result:
+            total_found = sum([cur, traverse(node.left), traverse(node.right)])
+
+            if total_found == 2:
                 result = node
-                return False
-            else:
-                return l or r
+                total_found = 0
 
-        find(root)
+            return total_found
+
+        traverse(root)
+
         return result

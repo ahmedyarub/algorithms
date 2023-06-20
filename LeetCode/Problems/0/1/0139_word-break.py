@@ -1,12 +1,17 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        lens = [len(wd) for wd in wordDict]
-        mn = min(lens)
+        @cache
+        def traverse(start: int) -> bool:
+            nonlocal s, wordDict
 
-        @lru_cache(maxsize=None)
-        def check(start: int, end: int) -> bool:
-            nonlocal s, wordDict, mn
-            return start == end or s[start:end] in wordDict or any(
-                [check(start, e) and check(e, end) for e in range(start + mn, end)])
+            if start == len(s):
+                return True
 
-        return check(0, len(s))
+            for word in wordDict:
+                if start + len(word) <= len(s) and word == s[start:start + len(word)]:
+                    if traverse(start + len(word)):
+                        return True
+
+            return False
+
+        return traverse(0)

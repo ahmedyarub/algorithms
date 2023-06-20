@@ -1,8 +1,8 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        return list(
-            filter(None, reduce(
-                lambda res, d: [word for c in
-                                [chr((d - 2) * 3 + (1 if d > 7 else 0) + ord('a') + i)
-                                 for i in range(4 if d in [7, 9] else 3)]
-                                for word in [prev + c for prev in res]], map(int, list(digits)), [''])))
+        mp = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+
+        if not len(digits):
+            return []
+
+        return [digit + comb for comb in (self.letterCombinations(digits[1:]) or ['']) for digit in mp[digits[0]][:]]

@@ -1,18 +1,13 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        m = {
-            '(': ')',
-            '[': ']',
-            '{': '}'
-        }
-
-        stack = []
+        open_brackets = {'(', '[', '{'}
+        close_open = {')': '(', ']': '[', '}': '{'}
+        stck = []
 
         for c in s:
-            if c in m:
-                stack.append(c)
-            else:
-                if not stack or m[stack.pop()] != c:
-                    return False
+            if c in open_brackets:
+                stck.append(c)
+            elif not len(stck) or close_open[c] != stck.pop():
+                return False
 
-        return not stack
+        return not len(stck)

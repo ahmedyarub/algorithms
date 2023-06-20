@@ -1,19 +1,19 @@
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        diameter = 0
+        result = 0
 
-        def getMaxDepth(node):
+        def traverse(node: Optional[TreeNode]) -> int:
+            nonlocal result
+
             if not node:
                 return 0
-            nonlocal diameter
 
-            left_path = getMaxDepth(node.left)
-            right_path = getMaxDepth(node.right)
+            left, right = traverse(node.left), traverse(node.right)
 
-            diameter = max(diameter, left_path + right_path)
+            result = max(result, left + right)
 
-            return max(left_path, right_path) + 1
+            return max(left, right) + 1
 
-        getMaxDepth(root)
+        traverse(root)
 
-        return diameter
+        return result

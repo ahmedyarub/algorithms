@@ -14,4 +14,4 @@ class Solution:
             return s
 
         dfs(root)
-        return [n for n, cnt in cnts.items() if cnt == mx]
+        return [n for n, cnt in cnts.vehicles() if cnt == mx]

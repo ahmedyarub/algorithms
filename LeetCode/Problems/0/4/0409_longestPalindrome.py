@@ -1,11 +1,10 @@
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        result, odd = 0, False
-        for cn in Counter(s).values():
-            if cn % 2:
-                result += cn - 1
-                odd = True
-            else:
-                result += cn
+        cnt, has_odd = Counter(s), False
 
-        return result + odd
+        for c in cnt.values():
+            if c // 2 != c / 2:
+                has_odd = True
+                break
+
+        return sum([c // 2 for c in cnt.values()]) * 2 + (1 if has_odd else 0)

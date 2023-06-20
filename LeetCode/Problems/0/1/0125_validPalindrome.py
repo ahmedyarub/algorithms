@@ -1,4 +1,18 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        arr = [c for c in s.lower() if 'z' >= c >= 'a' or '9' >= c >= '0']
-        return arr == arr[::-1]
+        left, right = 0, len(s) - 1
+
+        while left < right:
+            while left < len(s) and not s[left].isalnum():
+                left += 1
+
+            while right >= 0 and not s[right].isalnum():
+                right -= 1
+
+            if left < len(s) and right >= 0 and s[left].lower() != s[right].lower():
+                return False
+
+            left += 1
+            right -= 1
+
+        return True

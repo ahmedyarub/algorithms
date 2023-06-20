@@ -3,7 +3,7 @@ class Solution:
         counts = Counter([c for c in s])
 
         single = False
-        for _, count in counts.items():
+        for _, count in counts.vehicles():
             if count % 2:
                 if single:
                     return False

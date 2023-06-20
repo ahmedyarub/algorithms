@@ -1,16 +1,19 @@
 class Solution:
-    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def array_to_tree(left, right):
+            nonlocal preorder_index
+            if left > right:
+                return None
 
-        if not preorder or not inorder:
-            return None
+            root_value = preorder[preorder_index]
+            root = TreeNode(root_value)
+            preorder_index += 1
 
-        if len(preorder) == 1:
-            return TreeNode(preorder[0])
+            root.left = array_to_tree(left, inorder_index_map[root_value] - 1)
+            root.right = array_to_tree(inorder_index_map[root_value] + 1, right)
 
-        root = TreeNode(preorder[0])
-        root_index = inorder.index(preorder[0])
+            return root
 
-        root.left = self.buildTree(preorder[1:root_index + 1], inorder[:root_index])
-        root.right = self.buildTree(preorder[root_index + 1:], inorder[root_index + 1:])
+        inorder_index_map, preorder_index = {v: i for i, v in enumerate(inorder)}, 0
 
-        return root
+        return array_to_tree(0, len(preorder) - 1)

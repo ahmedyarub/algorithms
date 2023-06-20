@@ -3,7 +3,7 @@ class Solution:
         if x < 0 or (x > 0 and x % 10 == 0):
             return False
 
-        reverse_num = 0;
+        reverse_num = 0
         while x > reverse_num:
             reverse_num = reverse_num * 10 + x % 10
             x = x // 10

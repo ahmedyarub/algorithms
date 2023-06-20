@@ -1,15 +1,11 @@
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        if not head or not head.next:
+        if not head:
             return False
 
-        slow, fast = head, head.next
+        fast, slow = head.next, head
 
-        while slow != fast:
-            if not fast or not fast.next:
-                return False
+        while fast and fast.next and slow and fast != slow:
+            fast, slow = fast.next.next, slow.next
 
-            fast = fast.next.next
-            slow = slow.next
-
-        return True
+        return fast == slow

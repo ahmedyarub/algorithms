@@ -1,30 +1,17 @@
 class Solution:
-    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
         target = image[sr][sc]
 
-        if newColor == image[sr][sc]:
-            return image
+        def driver(r, c):
+            if 0 <= r < len(image) and 0 <= c < len(image[0]) and image[r][c] == target:
+                image[r][c] = color
 
-        queue = [[sr, sc]]
+                driver(r - 1, c)
+                driver(r + 1, c)
+                driver(r, c - 1)
+                driver(r, c + 1)
 
-        while queue:
-            r, c = queue.pop()
-
-            if image[r][c] != target:
-                continue
-
-            image[r][c] = newColor
-
-            if c > 0:
-                queue.append([r, c - 1])
-
-            if r > 0:
-                queue.append([r - 1, c])
-
-            if c < len(image[0]) - 1:
-                queue.append([r, c + 1])
-
-            if r < len(image) - 1:
-                queue.append([r + 1, c])
+        if target != color:
+            driver(sr, sc)
 
         return image

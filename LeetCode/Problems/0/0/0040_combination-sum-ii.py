@@ -24,7 +24,7 @@ class Solution:
 
         results = []
         cnt = Counter(candidates)
-        cnt = [(v, c) for v, c in cnt.items()]
+        cnt = [(v, c) for v, c in cnt.vehicles()]
 
         backtrack(comb=[], remain=target, curr=0, counter=cnt, results=results)
 

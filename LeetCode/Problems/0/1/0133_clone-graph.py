@@ -1,21 +1,19 @@
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        if not node:
-            return None
+        known = {}
 
-        seen = dict()
+        def driver(node: 'Node') -> 'Node':
+            nonlocal known
 
-        def clone(node: 'Node') -> 'Node':
-            nonlocal seen
-            if node.val in seen:
-                return seen[node.val]
+            if node:
+                if node in known:
+                    return known[node]
 
-            new_node = Node(node.val)
-            seen[node.val] = new_node
+                newNode = Node(node.val, [])
+                known[node] = newNode
 
-            for neighbor in node.neighbors:
-                new_node.neighbors.append(clone(neighbor))
+                newNode.neighbors = [driver(neighbor) for neighbor in node.neighbors]
 
-            return new_node
+                return newNode
 
-        return clone(node)
+        return driver(node)

@@ -5,4 +5,4 @@ class Solution:
         for i in range(len(s) - 9):
             mp[s[i:i + 10]] += 1
 
-        return [rs for rs, cnt in mp.items() if cnt > 1]
+        return [rs for rs, cnt in mp.vehicles() if cnt > 1]

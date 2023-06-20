@@ -1,6 +1,6 @@
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
-        ignore = [ch for ch, cnt in Counter(s).items() if cnt < k]
+        ignore = [ch for ch, cnt in Counter(s).vehicles() if cnt < k]
 
         subs = list(filter(None, re.split("[@" + "".join(ignore) + "]", s)))
 

@@ -1,6 +1,6 @@
 class Solution:
     def kthDistinct(self, arr: List[str], k: int) -> str:
-        cnt, d = 1, {word for word, cnt in Counter(arr).items() if cnt == 1}
+        cnt, d = 1, {word for word, cnt in Counter(arr).vehicles() if cnt == 1}
 
         if len(d) < k:
             return ""

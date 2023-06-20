@@ -1,23 +1,18 @@
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
-        result = []
-        carry = 0
+        ai, bi, result, car = len(a) - 1, len(b) - 1, [], 0
 
-        for i in range(max(len(a), len(b))):
-            cur_sum = 0
+        while ai >= 0 or bi >= 0:
+            an, bn = int(a[ai]) if ai >= 0 else 0, int(b[bi]) if bi >= 0 else 0
+            s = an + bn + car
 
-            if i < len(a):
-                cur_sum += int(a[len(a) - i - 1])
+            result.append('0' if s == 0 or s == 2 else '1')
+            car = 1 if s > 1 else 0
 
-            if i < len(b):
-                cur_sum += int(b[len(b) - i - 1])
+            ai -= 1
+            bi -= 1
 
-            cur_sum += carry
+        if car:
+            result.append('1')
 
-            result = [str(cur_sum % 2)] + result
-            carry = cur_sum // 2
-
-        if carry:
-            result = [str(carry)] + result
-
-        return "".join(result)
+        return ''.join(reversed(result))

@@ -1,19 +1,15 @@
 class Solution(object):
     def search(self, nums, target):
-        if target < nums[0] or target > nums[-1]:
-            return -1
+        left, right = 0, len(nums) - 1
 
-        start = 0
-        end = len(nums)
-
-        while start <= end:
-            mid = (start + end) // 2
-            if nums[mid] == target:
+        while left <= right:
+            mid = left + (right - left) // 2
+            cur = nums[mid]
+            if cur == target:
                 return mid
-            elif nums[mid] > target:
-                end = mid - 1
+            elif cur > target:
+                right = mid - 1
             else:
-                start = mid + 1
+                left = mid + 1
 
         return -1
-

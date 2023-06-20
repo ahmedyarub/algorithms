@@ -1,18 +1,21 @@
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        result, levels = [], set()
+        result, queue, cur_level, last_node = [], [[root.left, 1], [root.right, 1]] if root else [], 0, root
 
-        def traverse(node: Optional[TreeNode], level: int):
+        while queue:
+            node, node_level = queue.pop(0)
+
             if not node:
-                return
+                continue
 
-            if level not in levels:
-                result.append(node.val)
-                levels.add(level)
+            if node_level != cur_level:
+                result.append(last_node.val)
+                cur_level = node_level
 
-            traverse(node.right, level + 1)
-            traverse(node.left, level + 1)
+            last_node = node
+            queue.extend([[node.left, node_level + 1], [node.right, node_level + 1]])
 
-        traverse(root, 0)
+        if last_node:
+            result.append(last_node.val)
 
         return result

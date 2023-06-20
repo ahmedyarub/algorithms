@@ -1,24 +1,29 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        mem = {}
-        miss, cnt = 0, 1
+        candidates.sort()
 
-        def comb(candidates: List[int], target: int):
-            nonlocal mem, miss, cnt
+        @cache
+        def traverse(remaining: int, start: int) -> List[List[int]]:
+            nonlocal candidates
+            cur_results = []
 
-            result = set()
-            cnt += 1
-            if target not in mem:
-                miss += 1
-                for c in candidates:
-                    if c == target:
-                        result.add((c,))
-                    elif c < target:
-                        for nx in comb(candidates, target - c):
-                            result.add(tuple(sorted(([c] + list(nx)))))
-                    else:
-                        break
-                mem[target] = result
-            return mem[target]
+            i = start
+            while i < len(candidates):
+                candidate = candidates[i]
 
-        return list(map(list, comb(sorted(candidates), target)))
+                if candidate == remaining:
+                    cur_results.append([candidate])
+                elif candidate < remaining:
+                    cur_results.extend(
+                        [[candidate] + next_subgroup for next_subgroup in traverse(remaining - candidate, i)]
+                    )
+                else:
+                    break
+
+                i += 1
+                while i < len(candidates) and candidates[i] == candidate:
+                    i += 1
+
+            return cur_results
+
+        return traverse(target, 0)

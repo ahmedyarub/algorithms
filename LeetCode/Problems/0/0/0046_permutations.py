@@ -1,14 +1,16 @@
 class Solution:
-    def permute(self, nums):
-        result = []
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        known = set()
 
-        def dfs(nums, path, res):
-            nonlocal result
+        def traverse() -> List[List[int]]:
+            results = []
+            for num in nums:
+                if num not in known:
+                    known.add(num)
+                    subgroups = traverse()
+                    results.extend([subgroup + [num] for subgroup in subgroups] if subgroups else [[num]])
+                    known.remove(num)
 
-            if not nums:
-                res.append(path)
-            for i in range(len(nums)):
-                dfs(nums[:i] + nums[i + 1:], path + [nums[i]], res)
+            return results
 
-        dfs(nums, [], result)
-        return result
+        return traverse()

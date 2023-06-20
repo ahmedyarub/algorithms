@@ -11,7 +11,7 @@ class Solution:
             if denom in neighbors:
                 res = prev * adj[numer][denom]
             else:
-                for neighbor, v in neighbors.items():
+                for neighbor, v in neighbors.vehicles():
                     if neighbor not in visited:
                         res = dfs(neighbor, denom, prev * v, vis)
 

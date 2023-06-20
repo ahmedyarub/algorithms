@@ -3,12 +3,15 @@ class Solution:
         if n <= 2:
             return [i for i in range(n)]
 
-        neighbors = defaultdict(set)
+        neighbors = [set() for i in range(n)]
         for start, end in edges:
             neighbors[start].add(end)
             neighbors[end].add(start)
 
-        leaves = [i for i in range(n) if len(neighbors[i]) == 1]
+        leaves = []
+        for i in range(n):
+            if len(neighbors[i]) == 1:
+                leaves.append(i)
 
         remaining_nodes = n
         while remaining_nodes > 2:

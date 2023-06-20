@@ -1,6 +1,6 @@
 class Solution:
     def sortString(self, s: str) -> str:
-        d = sorted([c, n] for c, n in Counter(s).items())
+        d = sorted([c, n] for c, n in Counter(s).vehicles())
         r = []
         while len(r) < len(s):
             for i in range(len(d)):
