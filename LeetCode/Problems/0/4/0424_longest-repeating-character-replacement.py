@@ -1,15 +1,18 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        mp, result, ln = defaultdict(int), 0, 0
+        result, cnts, l, r, mxf = 0, defaultdict(int), 0, -1, 0
 
-        for i, c in enumerate(s):
-            mp[c] += 1
-            ln += 1
+        while r < len(s) - 1:
+            r += 1
 
-            while ln - max(mp.values()) > k:
-                mp[s[i - ln + 1]] -= 1
-                ln -= 1
-
-            result = max(result, ln)
+            cnts[s[r]] += 1
+            mxf = max(mxf, cnts[s[r]])
+            window = r - l + 1
+            others = window - mxf
+            if others <= k:
+                result = window
+            else:
+                cnts[s[l]] -= 1
+                l += 1
 
         return result

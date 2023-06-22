@@ -4,25 +4,36 @@ class Solution:
             return []
 
         num_rows, num_cols = len(matrix), len(matrix[0])
-        pacific_reachable = set()
-        atlantic_reachable = set()
 
-        def dfs(row: int, col: int, reachable: set):
-            reachable.add((row, col))
-            for (x, y) in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
-                new_row, new_col = row + x, col + y
-
-                if new_row < 0 or new_row >= num_rows or new_col < 0 or new_col >= num_cols:
-                    continue
-
-                if (new_row, new_col) not in reachable and matrix[new_row][new_col] >= matrix[row][col]:
-                    dfs(new_row, new_col, reachable)
-
+        pacific_queue = deque()
+        atlantic_queue = deque()
         for i in range(num_rows):
-            dfs(i, 0, pacific_reachable)
-            dfs(i, num_cols - 1, atlantic_reachable)
+            pacific_queue.append((i, 0))
+            atlantic_queue.append((i, num_cols - 1))
         for i in range(num_cols):
-            dfs(0, i, pacific_reachable)
-            dfs(num_rows - 1, i, atlantic_reachable)
+            pacific_queue.append((0, i))
+            atlantic_queue.append((num_rows - 1, i))
+
+        def bfs(queue):
+            reachable = set()
+            while queue:
+                (row, col) = queue.popleft()
+                reachable.add((row, col))
+                for (x, y) in [(1, 0), (0, 1), (-1, 0), (0, -1)]:  # Check all 4 directions
+                    new_row, new_col = row + x, col + y
+                    if new_row < 0 or new_row >= num_rows or new_col < 0 or new_col >= num_cols:
+                        continue
+
+                    if (new_row, new_col) in reachable:
+                        continue
+
+                    if matrix[new_row][new_col] < matrix[row][col]:
+                        continue
+
+                    queue.append((new_row, new_col))
+            return reachable
+
+        pacific_reachable = bfs(pacific_queue)
+        atlantic_reachable = bfs(atlantic_queue)
 
         return list(pacific_reachable.intersection(atlantic_reachable))
