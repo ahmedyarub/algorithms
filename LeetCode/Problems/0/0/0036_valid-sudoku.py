@@ -1,17 +1,19 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        seenrow, seencol = defaultdict(set), defaultdict(set)
-        for rs in range(3):
-            for cs in range(3):
-                seens = set()
-                for row in range(rs * 3, rs * 3 + 3):
-                    for col in range(cs * 3, cs * 3 + 3):
-                        if board[row][col] != '.':
-                            if any([board[row][col] in st for st in [seens, seenrow[row], seencol[col]]]):
+        row_st, col_st = [set() for _ in range(9)], [set() for _ in range(9)]
+        for sr in range(3):
+            for cr in range(3):
+                box_st = set()
+                for r in range(3):
+                    for c in range(3):
+                        row, column = 3 * sr + r, 3 * cr + c
+                        num = board[row][column]
+                        if num != '.':
+                            if num in box_st or num in row_st[row] or num in col_st[column]:
                                 return False
 
-                            seens.add(board[row][col])
-                            seenrow[row].add(board[row][col])
-                            seencol[col].add(board[row][col])
-        print(seencol)
+                            box_st.add(num)
+                            row_st[row].add(num)
+                            col_st[column].add(num)
+
         return True
