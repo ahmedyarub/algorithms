@@ -1,23 +1,27 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
-        result = []
+        if not root:
+            return []
 
-        def traverse(node: Optional[TreeNode], curs: int, path: List[int]):
-            nonlocal targetSum, result
+        result, cur_path = [], []
+
+        def driver(node: Optional[TreeNode], cur_sum: int):
+            nonlocal result
+
             if not node:
                 return
 
-            curs += node.val
-
-            path.append(node.val)
-            if not node.left and not node.right and curs == targetSum:
-                result.append(path[:])
+            s = cur_sum + node.val
+            cur_path.append(node.val)
+            if s == targetSum and not node.left and not node.right:
+                result.append(cur_path[:])
             else:
-                traverse(node.left, curs, path)
-                traverse(node.right, curs, path)
+                driver(node.left, s)
+                driver(node.right, s)
 
-            path.pop()
+            cur_path.pop()
 
-        traverse(root, 0, [])
+            return
 
+        driver(root, 0)
         return result
