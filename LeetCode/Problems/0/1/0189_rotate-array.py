@@ -3,18 +3,18 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        n = len(nums)
-        k %= n
-
-        start = count = 0
-        while count < n:
-            curi, prev = start, nums[start]
+        cnt, start = 0, 0
+        while cnt < len(nums):
+            tmp = nums[start]
+            i = start
             while True:
-                nexti = (curi + k) % n
-                nums[nexti], prev = prev, nums[nexti]
-                curi = nexti
-                count += 1
+                nxt_i = (i + k) % len(nums)
+                nums[nxt_i], tmp = tmp, nums[nxt_i]
+                cnt += 1
+                i = (i + k) % len(nums)
 
-                if start == curi:
+                if cnt == len(nums):
+                    return
+                elif i == start:
+                    start += 1
                     break
-            start += 1
