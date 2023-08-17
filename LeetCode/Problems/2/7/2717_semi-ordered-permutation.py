@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def semiOrderedPermutation(self, nums: List[int]) -> int:
         mn, mx = nums.index(1), nums.index(n := len(nums))
