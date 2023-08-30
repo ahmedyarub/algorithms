@@ -16,9 +16,3 @@ class Solution:
                 result = i + 1
 
         return result
-
-
-if __name__ == '__main__':
-    print(Solution().bestClosingTime("YYNY"))
-    print(Solution().bestClosingTime("NNNNN"))
-    print(Solution().bestClosingTime("YYYY"))
