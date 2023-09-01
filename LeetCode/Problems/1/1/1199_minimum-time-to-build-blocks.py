@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
     def minBuildTime(self, blocks: List[int], split: int) -> int:
         heapify(blocks)
