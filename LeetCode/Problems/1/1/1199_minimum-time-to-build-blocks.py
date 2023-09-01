@@ -3,7 +3,7 @@ class Solution:
         heapify(blocks)
 
         while len(blocks) > 1:
-            _ = heapq.heappop(blocks)
-            heappush(blocks, split + heapq.heappop(blocks))
+            _ = heappop(blocks)
+            heappush(blocks, split + heappop(blocks))
 
         return heappop(blocks)
