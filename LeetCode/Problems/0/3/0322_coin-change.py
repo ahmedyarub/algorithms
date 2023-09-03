@@ -1,32 +1,19 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        coins.sort(reverse=True)
-        result, results = float('inf'), defaultdict(int)
+        q, seen = deque(), set()
+        q.append((0, amount))
 
-        def traverse(start: int, remaining: int, cnt: int):
-            nonlocal result
+        while q:
+            cnt, rem = q.popleft()
 
-            if not remaining:
-                result = cnt
-                return
+            if not rem:
+                return cnt
+            elif rem > 0:
+                nxt_cnt = cnt + 1
+                for coin in coins:
+                    nxt_rem = rem - coin
+                    if nxt_rem not in seen:
+                        q.append((nxt_cnt, nxt_rem))
+                        seen.add(nxt_rem)
 
-            if cnt >= result or start >= len(coins):
-                return
-
-            if results[remaining] and results[remaining] <= cnt:
-                return
-            else:
-                results[remaining] = cnt
-
-            for j in range(start, len(coins)):
-                remain = remaining - coins[j]
-
-                if remain < 0:
-                    continue
-
-                traverse(i if remain >= coins[i] else i + 1, remain, cnt + 1)
-
-        for i in range(len(coins)):
-            traverse(i, amount, 0)
-
-        return -1 if result == float('inf') else result
+        return -1
